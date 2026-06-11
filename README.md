@@ -1,12 +1,12 @@
-# PDE with Random Coefficient — FEM + Random Field Sampling
+# PDE with Random Coefficient - FEM solver and MLMC estimator
 
-Repository for experimenting with 1D finite element discretizations of PDEs with random coefficients
-and Monte Carlo / MLMC estimators. The code is minimal, exploratory, and intended for research/teaching.
+Repository for experimenting with 1D finite element discretizations of PDEs with random coefficients and Monte Carlo / MLMC estimators. 
+The code is minimal, exploratory, and intended for research/teaching.
 
 ## Overview
 
 This project demonstrates generating Gaussian random fields with a Matern-like covariance via an
-FEM discretization of the SPDE (Id - k^{-2} Laplacian) u = W, using those fields as coefficients in
+FEM discretization of the SPDE $(Id - k^{-2} Laplacian) u = W' $, using those fields as coefficients in
 a second-order elliptic PDE, solving the PDE with a weighted stiffness matrix, and estimating
 statistics (e.g. expected L^2 norm of the PDE solution) using Monte Carlo. The code is 1D and
 designed for experiments and clarity rather than production performance.
