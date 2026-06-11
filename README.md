@@ -5,11 +5,12 @@ The code is minimal, exploratory, and intended for research/teaching.
 
 ## Overview
 
-This project demonstrates generating Gaussian random fields with a Matern-like covariance via an
-FEM discretization of the SPDE $(Id - k^{-2} \Delta ) u = W' $, using those fields as coefficients in
-a second-order elliptic PDE, solving the PDE with a weighted stiffness matrix, and estimating
-statistics (e.g. expected L^2 norm of the PDE solution) using Monte Carlo. The code is 1D and
-designed for experiments and clarity rather than production performance.
+This project demonstrates how to generate a Gaussian random fields with a Matern-like covariance via an
+FEM discretization of the SPDE $(Id - k^{-2} \Delta ) u = W' $ and how to use those fields as coefficients in
+a second-order elliptic PDE. 
+Solving the PDE with a weighted stiffness matrix, and estimating
+statistics (e.g. expected L^2 norm of the PDE solution) using Monte Carlo. 
+The code is 1D and designed for experiments and clarity rather than production performance.
 
 ## Repository structure
 
@@ -18,7 +19,7 @@ designed for experiments and clarity rather than production performance.
 - [auxiliary_fem.py](auxiliary_fem.py) — minimal 1D FEM utilities: basis functions, local/global mass and stiffness
   matrices, weighted stiffness assembly, and numeric RHS assembly (`rhs`).
 - [random_field_generator.py](random_field_generator.py) — constructs Gaussian random field samples solving
-  (M + k^{-2} K) u = b where `b` is assembled from element-wise Gaussian samples with covariance `M_e`.
+  $(M + k^{-2} K) u = b$ where `b` is assembled from element-wise Gaussian samples with covariance `M_e`.
 - [test_0.py](test_0.py), [test_1.py](test_1.py), [test_2.py](test_2.py) — example scripts and sanity checks
   that exercise the FEM routines and deterministic/weighted PDE solver.
 - [requirements.txt](requirements.txt) — Python packages used by the project.
