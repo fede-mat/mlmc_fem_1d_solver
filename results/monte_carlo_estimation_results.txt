@@ -3,3 +3,33 @@ Time taken for Monte Carlo estimation: 1.0 hours 29 min 48.94 seconds
 
 Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with 10000 samples, seed 2026: 0.18688853989513146
 Time taken for Monte Carlo estimation: 0.0 hours 8 min 52.93 seconds
+
+Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with 10000 samples, seed 2026: 0.18688853989513146
+Time taken for Monte Carlo estimation: 0.0 hours 8 min 14.11 seconds
+
+Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with 1000 samples, seed 2026: 0.19263251472509055
+Time taken for Monte Carlo estimation: 0.0 hours 1 min 18.32 seconds
+
+Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with 100 samples, seed 2026: 0.17095288589067742
+Time taken for Monte Carlo estimation: 0.0 hours 0 min 12.55 seconds
+
+Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with 100 samples, seed 2026: 0.17095288589067742
+Time taken for Monte Carlo estimation: 0.0 hours 0 min 8.39 seconds
+
+Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with 100 samples, seed 2026: 0.17095288589067742
+Time taken for Monte Carlo estimation: 0.0 hours 0 min 8.62 seconds
+
+Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with 1000 samples, seed 2026: 0.19263251472509055
+Time taken for Monte Carlo estimation: 0.0 hours 2 min 38.66 seconds
+
+Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with 10000 samples, seed 2026: 0.18688853989513146
+Time taken for Monte Carlo estimation: 0.0 hours 8 min 52.48 seconds
+
+Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with 10 samples, seed 2026: 0.19286130905025717
+Time taken for Monte Carlo estimation: 0.0 hours 0 min 1.22 seconds
+
+Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with 10 samples, seed 2026: 0.15448336991539383
+Time taken for Monte Carlo estimation: 0.0 hours 0 min 0.09 seconds
+
+Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with 10 samples, seed 2026: 0.19286130905025717
+Time taken for Monte Carlo estimation: 0.0 hours 0 min 1.12 seconds

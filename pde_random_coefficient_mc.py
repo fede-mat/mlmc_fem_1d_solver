@@ -18,7 +18,7 @@ def function_f(x):
     return np.ones_like(x)
 
 def solve_pde_problem(x_G,x_D,f,g0,gN,k):
-    u_sample = generate_random_field(x_D, k,0,0)
+    u_sample = generate_random_field_mc(x_D, k,0,0)
     u_sample_trunc = u_sample[(x_D >= -0.5) & (x_D <= 0.5)]
     weights = np.exp(u_sample_trunc)
     A = weighted_stiffness_matrix(x_G, weights)
@@ -38,7 +38,7 @@ def monte_carlo_estimation(num_samples,x_G,X_D,f,g0,gN,k):
     for i in range(num_samples):
         _, q_norm_sample = solve_pde_problem(x_G,X_D,f,g0,gN,k)
         norms[i] = q_norm_sample
-        if  i % 1000 == 0:
+        if  i % (num_samples // 10) == 0:
             print(f"Monte Carlo estimation: {i}/{num_samples} samples completed in {time.time() - time_Start:.2f} seconds")
     return norms
 
@@ -53,15 +53,18 @@ def monte_carlo_estimation(num_samples,x_G,X_D,f,g0,gN,k):
 seed = 2026
 np.random.seed(seed) # for reproducibility
 
-num_samples = 10000
+num_samples = 10
 x_D = np.linspace(-1,1,201)
 x_G = np.linspace(-0.5,0.5,101)
 k=10
 time_Start = time.time()
-norms = monte_carlo_estimation(num_samples,x_G,x_D,function_f,0,0,k)
+norms_1 = monte_carlo_estimation(num_samples,x_G,x_D,function_f,0,0,k)
 time_End = time.time()
 sec = (time_End - time_Start)
-string = f"Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with {num_samples} samples, seed {seed}: {np.mean(norms)}"
+norms_2 = monte_carlo_estimation(num_samples,x_G,x_D,function_f,0,0,k)
+norms_3 = monte_carlo_estimation(num_samples,x_G,x_D,function_f,0,0,k)
+
+string = f"Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with {num_samples} samples, seed {seed}: {np.mean(norms_1)}"
 print(string)
 string_1 = f"Time taken for Monte Carlo estimation: {sec // 3600} hours {sec // 60 % 60:.0f} min {sec % 60:.2f} seconds"
 print(string_1)
@@ -70,20 +73,32 @@ with open('results/monte_carlo_estimation_results.txt', 'a') as f:
     f.write(string + '\n')
     f.write(string_1 + '\n')
 
-plt.hist(norms, bins=20, alpha=0.7, label='Monte Carlo Estimates')
+plt.hist(norms_1, bins='auto', density=True, alpha=0.7, label='Monte Carlo Estimates')
 plt.xlabel('||q||_L^2(-0.5,0.5)')
 plt.ylabel('Frequency')
 plt.title('Distribution of ||q||_L^2(-0.5,0.5) Estimates')
 plt.legend()
-plt.savefig('results/histogram_mc_estimates_seed_{seed}_samples_{num_samples}.png')
+plt.grid()
+#plt.autoscale(enable=True, axis='y', tight=True)
+#plt.autoscale(enable=True, axis='x', tight=True)
+plt.savefig(f'results/histogram_mc_estimates_seed_{seed}_samples_{num_samples}.png')
+plt.show()
 
-mean_trend = np.cumsum(norms) / np.arange(1, num_samples + 1)
-plt.plot(mean_trend, label=' Mean Trend')
+mean_trend_1 = np.cumsum(norms_1) / np.arange(1, num_samples + 1)
+mean_trend_2 = np.cumsum(norms_2) / np.arange(1, num_samples + 1)
+mean_trend_3 = np.cumsum(norms_3) / np.arange(1, num_samples + 1)
+
+plt.plot(mean_trend_1, label=' Mean Trend 1')
+plt.plot(mean_trend_2, label=' Mean Trend 2')
+plt.plot(mean_trend_3, label=' Mean Trend 3')
 plt.xlabel('Number of Samples')
 plt.ylabel(' Mean')
 plt.title('Convergence of Monte Carlo Estimation')
 plt.legend()
-plt.savefig('results/convergence_mc_{seed}_samples_{num_samples}.png')
+plt.grid()
+#plt.autoscale(enable=True, axis='y', tight=True)
+plt.savefig(f'results/convergence_mc_seed_{seed}_samples_{num_samples}.png')
+plt.show()
 
 [q, estimated_norm] = solve_pde_problem(x_G,x_D,function_f,0,0,k)
 plt.plot(x_G, q)
@@ -92,4 +107,5 @@ plt.xlabel("x")
 plt.ylabel("q")
 plt.grid()
 plt.legend()
-plt.savefig('results/solution_pde_sample.png')        
+plt.savefig(f'results/solution_pde_sample.png')
+plt.show()        
