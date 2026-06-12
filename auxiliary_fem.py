@@ -112,6 +112,19 @@ def local_bool_matrix(n,l):
         B[i+n,i]=1
     return B.T
 
+def M_e_l_matrix(a,b,xx):
+    k = xx[(xx >=a) & (xx <=b)]
+    # k will allow me to spot the righ basis function phi 
+    
+    # TO BE DONE INTEGRAL OF  (ax+b)(cx+d) dx over interval [a,b]
+    return 
+
+def R_e_l_matrix():
+
+    return 
+
+
+
 def global_mass_matrix(xl):
     l=len(xl)-1
     M=np.zeros((l+1,l+1))

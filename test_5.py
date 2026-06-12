@@ -26,9 +26,9 @@ def visualize_function_space(x):
     plt.grid()
     plt.legend()
 
-visualize_function_space(x_l_1)
-visualize_function_space(x_l)
-visualize_function_space(x_s)
+#visualize_function_space(x_l_1)
+#visualize_function_space(x_l)
+#visualize_function_space(x_s)
 plt.show()
 
 # I want to write phi_i of l-1 as a linear combination of phi_i of l
