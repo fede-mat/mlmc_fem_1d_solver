@@ -42,14 +42,7 @@ def monte_carlo_estimation(num_samples,x_G,X_D,f,g0,gN,k):
             print(f"Monte Carlo estimation: {i}/{num_samples} samples completed in {time.time() - time_Start:.2f} seconds")
     return norms
 
-# TO DO: IMPLEMENT THE MULTILEVEL MONTECARLO METHOD
-# Now we want to use MLMC to estimate the same quantity. 
-# We will use a hierarchy of meshes with different levels of refinement and compute the differences 
-# between the solutions on these meshes to reduce the variance of our estimator.
 
-# def multilevel_motecarlo_estimation():
-
-# ========== TO DO ==========
 seed = 2026
 np.random.seed(seed) # for reproducibility
 

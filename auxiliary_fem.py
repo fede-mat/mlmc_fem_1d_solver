@@ -112,18 +112,33 @@ def local_bool_matrix(n,l):
         B[i+n,i]=1
     return B.T
 
-def M_e_l_matrix(a,b,xx):
-    k = xx[(xx >=a) & (xx <=b)]
-    # k will allow me to spot the righ basis function phi 
+def M_e_l_matrix(alpha,beta,xx):
+    idx = np.where((xx >= alpha)  & (xx <= beta))[0]
+    print(idx)
+    k_1 = idx[0]
+    k = idx[1]
+    x_1 = xx[k_1]
+    x = xx[k]
+    M_e_l = np.zeros([2,2])
+    # phi_i_e = ax + b
+    a  =  - 1 / (x - x_1)
+    b  =  x / (x - x_1)
+    # phi_j_e = cx + d
+    c  =  - a
+    d = - x_1 / (x - x_1)
+
+    # (M_e)_ij = int_ alpha to beta (ax+b)(cx + d) dx
+    M_e_l[0,0] = (a*a*(beta**3-alpha**3))/3.0 + a*b*(beta**2-alpha**2) + b*b*(beta-alpha)
+    M_e_l[1,0] = (a*c*(beta**3 - alpha**3))/3.0 + ((a*d + b*c)*(beta**2 - alpha**2))/2.0 + b*d*(beta - alpha)
+    M_e_l[1,1] = (c*c*(beta**3-alpha**3))/3.0 + c*d*(beta**2-alpha**2) + d*d*(beta-alpha)
+    M_e_l[0,1] = M_e_l[1,0]
     
-    # TO BE DONE INTEGRAL OF  (ax+b)(cx+d) dx over interval [a,b]
-    return 
+    return M_e_l
 
-def R_e_l_matrix():
-
-    return 
-
-
+def R_e_l_matrix(M_l,M_s):
+    L_s = np.linalg.cholesky(M_s)
+    L_l = np.linalg.cholesky(M_l)
+    return np.linalg.inv(L_s).T @ L_l
 
 def global_mass_matrix(xl):
     l=len(xl)-1
