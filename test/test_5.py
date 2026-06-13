@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from auxiliary_fem import *
 import matplotlib.pyplot as plt
 
@@ -33,18 +37,3 @@ def visualize_function_space(x):
 visualize_function_space(np.linspace(-1,1,9))
 visualize_function_space(np.linspace(-0.5,0.5,5))
 plt.show()
-
-# I want to write phi_i of l-1 as a linear combination of phi_i of l
-
-def global_coefficient_matrix(x_l, x_l_1):
-    
-
-    return R
-
-def local_coefficient_matrix():
-
-    return
-
-#R = global_coefficient_matrix(x_l, x_l_1)
-#print("Coefficient matrix R:\n", R)
-

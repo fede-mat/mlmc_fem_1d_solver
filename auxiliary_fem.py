@@ -112,7 +112,7 @@ def local_bool_matrix(n,l):
         B[i+n,i]=1
     return B.T
 
-def finid_indices(alpha,beta,xx)
+#def finid_indices(alpha,beta,xx)
     # TO BE COMPLETED !!!
     return
 
