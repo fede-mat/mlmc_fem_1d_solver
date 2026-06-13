@@ -13,7 +13,7 @@ print("Supermesh:", x_s)
 
 def visualize_function_space(x):
     l = len(x)
-    xx = np.linspace(0, 1, 100)
+    xx = np.linspace(x[0], x[len(x)-1], 100)
     for i in range(l):
         if i == 0:
             plt.plot(xx, phi_i_0(xx,x[i],x[i+1]), label=f"phi_0_{l}")
@@ -22,13 +22,16 @@ def visualize_function_space(x):
         else:
             plt.plot(xx, phi_i(xx,x[i-1],x[i],x[i+1]), label=f"phi_{i}_{l}")
     plt.title("Piecewise linear basis functions")
-    plt.xlabel("x")
     plt.grid()
-    plt.legend()
+    plt.xlabel("x")
+    plt.ylabel("y")
+    
 
 #visualize_function_space(x_l_1)
 #visualize_function_space(x_l)
 #visualize_function_space(x_s)
+visualize_function_space(np.linspace(-1,1,9))
+visualize_function_space(np.linspace(-0.5,0.5,5))
 plt.show()
 
 # I want to write phi_i of l-1 as a linear combination of phi_i of l

@@ -1,8 +1,8 @@
 import numpy as np
-from scipy.special import kn
+from scipy.special import kn, gamma
 import matplotlib.pyplot as plt
 
-x = np.linspace(0, 5, 1000)
+x = np.linspace(0,1,100)
 for N in range(6):
     plt.plot(x, kn(N, x), label='$K_{}(x)$'.format(N))
 plt.ylim(0, 10)
@@ -10,17 +10,50 @@ plt.legend()
 plt.title(r'Modified Bessel function of the second kind $K_n(x)$')
 plt.show()
 
-#plot of matern covariance function
-def matern_covariance(x,y,nu,sigma,k):
-    r=np.linalg.norm(x-y)
-    if r==0:
-        return 1
-    else:
-        return (sigma**2/(2**(nu-1)*np.math.gamma(nu)))*(r*k)**nu*kn(nu,r*k)
+# Funzione di covarianza Matérn vettorizzata rispetto alla distanza r
+def matern_covariance(r, nu, sigma, k):
+    # Evita la divisione per zero e l'indeterminazione di kn calcolando solo dove r > 0
+    # Quando r = 0, il valore limite è sigma**2
+    res = np.zeros_like(r)
     
-x = np.linspace(0, 5, 100)
-y = np.linspace(0, 5, 100)
+    # Maschera per i punti dove la distanza è maggiore di zero
+    mask = r > 0
+    
+    # Calcolo per r > 0
+    rk = r[mask] * k
+    numerator = (sigma**2) * (rk**nu) * kn(nu, rk)
+    denominator = (2**(nu - 1)) * gamma(nu)
+    res[mask] = numerator / denominator
+    
+    # Caso r == 0
+    res[~mask] = sigma**2
+    return res
+
+# Definizione della griglia spaziale (distanze dall'origine o coordinate dx, dy)
+x = np.linspace(-1, 1, 200)
+y = np.linspace(-1, 1, 200)
 X, Y = np.meshgrid(x, y)
-Z = matern_covariance(x,y,1,1,1)  
-plt.contourf(X, Y, Z, levels=50, cmap='viridis')
-plt.colorbar(label='Covariance')
+
+# Calcola la distanza euclidea di ogni punto dall'origine (0,0)
+R = np.sqrt(X**2 + Y**2)
+
+# Calcolo dei valori Z
+Z = matern_covariance(R, nu=2.5, sigma=4.0, k=10.0)  
+
+# Creazione del grafico 3D
+fig, ax = plt.subplots(subplot_kw={"projection": "3d"}, figsize=(10, 7))
+
+# Disegno della superficie
+surf = ax.plot_surface(X, Y, Z, cmap='viridis', edgecolor='none', antialiased=True)
+
+# Configurazione dettagli estetici
+fig.colorbar(surf, ax=ax, shrink=0.5, aspect=10, label='Covariance')
+ax.set_title('Matérn Covariance')
+ax.set_xlabel('X coordinate')
+ax.set_ylabel('Y coordinate')
+ax.set_zlabel('Covariance')
+
+# Ottimizzazione prospettiva iniziale (opzionale)
+ax.view_init(elev=30, azim=45)
+
+plt.show()

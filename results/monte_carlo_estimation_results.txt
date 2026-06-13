@@ -33,3 +33,5 @@ Time taken for Monte Carlo estimation: 0.0 hours 0 min 0.09 seconds
 
 Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with 10 samples, seed 2026: 0.19286130905025717
 Time taken for Monte Carlo estimation: 0.0 hours 0 min 1.12 seconds
+Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with 10 samples, seed 2026: 0.19286130905025717
+Time taken for Monte Carlo estimation: 0.0 hours 0 min 1.39 seconds

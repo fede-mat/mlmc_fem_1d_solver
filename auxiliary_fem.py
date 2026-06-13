@@ -112,8 +112,12 @@ def local_bool_matrix(n,l):
         B[i+n,i]=1
     return B.T
 
+def finid_indices(alpha,beta,xx)
+    # TO BE COMPLETED !!!
+    return
+
 def M_e_l_matrix(alpha,beta,xx):
-    idx = np.where((xx >= alpha)  & (xx <= beta))[0]
+    idx = np.where((xx[:-1] <= beta) & (xx[1:] >= alpha))[0]
     print(idx)
     k_1 = idx[0]
     k = idx[1]

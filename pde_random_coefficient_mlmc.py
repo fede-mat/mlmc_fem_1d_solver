@@ -91,7 +91,7 @@ def visualize_mean_trend_from_norms(norms,num_samples_l,levels):
 seed = 2026
 np.random.seed(seed) # for reproducibility
 
-total_num_samples = 10000
+total_num_samples = 100
 # We use auxiliary_mlmc.py to compute the optimal number of samples of each level
 percetage = np.array([0.17057356, 0.14457316, 0.10927159, 0.13943153, 0.09303149, 0.07291983, 0.08881164, 0.0726671,  0.05782876, 0.05089134])
 num_samples_l = percetage*total_num_samples
