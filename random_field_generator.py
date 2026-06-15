@@ -50,8 +50,6 @@ def generate_random_field_mlmc(x_l,xl_1,x_s,k,g0,gN):
 
     b_l = np.zeros_like(x_l)
     bl_1= np.zeros_like(xl_1)
-    b = np.concatenate((b_l,bl_1))
-    b = b.astype(float)
 
     for i in range(s):
         h_s = x_s[i+1]-x_s[i]
@@ -60,25 +58,26 @@ def generate_random_field_mlmc(x_l,xl_1,x_s,k,g0,gN):
         M_e_l_1 = M_e_l_matrix(x_s[i],x_s[i+1],xl_1)
         M_e_s = local_mass_matrix(h_s)
 
-        R_e_l = R_e_l_matrix(M_e_l,M_e_s)
-        R_e_l_1 = R_e_l_matrix(M_e_l_1,M_e_s)
+        R_e_l = R_e_l_matrix(x_s[i],x_s[i+1],x_l)
+        R_e_l_1 = R_e_l_matrix(x_s[i],x_s[i+1],xl_1)
 
-        M_e_l_l_1 = R_e_l.T @ M_e_s @ M_e_l_1 
+        M_e_l_l_1 = R_e_l.T @ M_e_s @ R_e_l_1 
 
-        M_e = np.array([M_e_l,M_e_l_l_1],[M_e_l_l_1.T, M_e_l_1])  # controllare come viene assemblata questa matrice!!!     
+        M_e = np.block([[M_e_l, M_e_l_l_1],[M_e_l_l_1.T,  M_e_l_1]])
+
         
         b_e = np.random.multivariate_normal(mean=np.zeros(4),cov=M_e)
         b_e_l = b_e[0:2]
         b_el_1 = b_e[2:]
 
-        indx_l = np.where((x_l >= x_s[i] ) & ( x_l <= x_s[i+1]))[0]
-        indx_l_1 = np.where((xl_1 >= x_s[i] ) & ( xl_1 <= x_s[i+1]))[0]
+        indx_l , _  = find_indices(x_s[i],x_s[i+1],x_l)
+        indx_l_1 , _  = find_indices(x_s[i],x_s[i+1],xl_1)
+        
+        b_l += local_bool_matrix(indx_l,l).T @ b_e_l
+        bl_1 += local_bool_matrix(indx_l_1,l_1).T @ b_el_1
 
-        b_l += local_bool_matrix(indx_l[0],l).T @ b_e_l
-        bl_1 += local_bool_matrix(indx_l_1[0],l_1).T @ b_el_1
-
-    b_int_l = b[1:l_1] - A_l[1:-1, 0] * g0 - A_l[1:-1, -1] * gN
-    b_int_l_1 = b[l_1+2:-1] - Al_1[1:-1, 0] * g0 - Al_1[1:-1, -1] * gN
+    b_int_l = b_l[1:-1] - A_l[1:-1, 0] * g0 - A_l[1:-1, -1] * gN
+    b_int_l_1 = bl_1[1:-1] - Al_1[1:-1, 0] * g0 - Al_1[1:-1, -1] * gN
 
     u_l = np.zeros(len(x_l))
     ul_1= np.zeros(len(xl_1))
@@ -97,7 +96,7 @@ def generate_random_field_mlmc(x_l,xl_1,x_s,k,g0,gN):
     u_l[1:-1]= u_int_l
     ul_1[1:-1]= u_int_l_1
 
-    return np.concatenate((u_l,ul_1))
+    return u_l, ul_1
 
 def visualize_mc_rf():
     x = np.linspace(0,1,201)

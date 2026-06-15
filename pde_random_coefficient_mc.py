@@ -46,7 +46,7 @@ def monte_carlo_estimation(num_samples,x_G,X_D,f,g0,gN,k):
 seed = 2026
 np.random.seed(seed) # for reproducibility
 
-num_samples = 10
+num_samples = 100
 x_D = np.linspace(-1,1,201)
 x_G = np.linspace(-0.5,0.5,101)
 k=10

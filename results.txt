@@ -1,7 +1,0 @@
-(venv1) C:\Users\Fede\OneDrive - TUM\SS_2026\Seminar\code>"c:/Users/Fede/OneDrive - TUM/SS_2026/Seminar/code/venv1/Scripts/python.exe" "c:/Users/Fede/OneDrive - TUM/SS_2026/Seminar/code/pde_random_coefficient.py"
-Time taken for Monte Carlo estimation: 393.07 seconds
-Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with 10000 samples: 0.1869172542515432
-
-(venv1) C:\Users\Fede\OneDrive - TUM\SS_2026\Seminar\code>"c:/Users/Fede/OneDrive - TUM/SS_2026/Seminar/code/venv1/Scripts/python.exe" "c:/Users/Fede/OneDrive - TUM/SS_2026/Seminar/code/pde_random_coefficient.py"
-Time taken for Monte Carlo estimation: 0.41 seconds
-Estimated expected value of ||q||_L^2(-0.5,0.5) using Monte Carlo with 10 samples: 0.19287427378956615

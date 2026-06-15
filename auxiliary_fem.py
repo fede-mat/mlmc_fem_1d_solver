@@ -112,15 +112,29 @@ def local_bool_matrix(n,l):
         B[i+n,i]=1
     return B.T
 
-#def finid_indices(alpha,beta,xx)
-    # TO BE COMPLETED !!!
-    return
+import numpy as np
+
+def find_indices(alpha, beta, xx):
+    """
+    Restituisce gli indici (i_left, i_right) tali che
+
+        xx[i_left] <= alpha <= beta <= xx[i_right]
+
+    con i_left e i_right nodi consecutivi della mesh che
+    contengono il sottointervallo [alpha,beta].
+    """
+
+    i_left = np.searchsorted(xx, alpha, side='right') - 1
+    i_right = np.searchsorted(xx, beta, side='left')
+
+    # gestione degli estremi
+    i_left = max(0, i_left)
+    i_right = min(len(xx)-1, i_right)
+
+    return i_left, i_right
 
 def M_e_l_matrix(alpha,beta,xx):
-    idx = np.where((xx[:-1] <= beta) & (xx[1:] >= alpha))[0]
-    print(idx)
-    k_1 = idx[0]
-    k = idx[1]
+    k_1 , k = find_indices(alpha,beta,xx)
     x_1 = xx[k_1]
     x = xx[k]
     M_e_l = np.zeros([2,2])
@@ -139,10 +153,25 @@ def M_e_l_matrix(alpha,beta,xx):
     
     return M_e_l
 
-def R_e_l_matrix(M_l,M_s):
-    L_s = np.linalg.cholesky(M_s)
-    L_l = np.linalg.cholesky(M_l)
-    return np.linalg.inv(L_s).T @ L_l
+def R_e_l_matrix(alpha,beta,xx):
+    k_1 , k = find_indices(alpha,beta,xx)
+    x_1 = xx[k_1]
+    x = xx[k]
+
+    # phi_i_l = ax + b
+    a  =  - 1 / (x - x_1)
+    b  =  x / (x - x_1)
+    # phi_j_l = cx + d
+    c  =  - a
+    d = - x_1 / (x - x_1)
+
+    R = np.zeros([2,2])
+    R[0,0] = a *alpha + b
+    R[1,0] = a* beta + b
+    R[0,1] = c * alpha + d
+    R[1,1] = c * beta + d
+
+    return R
 
 def global_mass_matrix(xl):
     l=len(xl)-1
