@@ -11,3 +11,5 @@ Estimated expected value of ||q||_L^2(-0.5,0.5) using Multilevel Monte Carlo wit
 Time taken for Multilevel Monte Carlo estimation: 0.0 hours 58 min 0.54 seconds
 Estimated expected value of ||q||_L^2(-0.5,0.5) using Multilevel Monte Carlo with 100 samples, seed 2026: 0.3104712714432629
 Time taken for Multilevel Monte Carlo estimation: 0.0 hours 0 min 6.04 seconds
+Estimated expected value of ||q||_L^2(-0.5,0.5) using Multilevel Monte Carlo with 100 samples, seed 2026: 0.3104712714432629
+Time taken for Multilevel Monte Carlo estimation: 0.0 hours 0 min 6.11 seconds
