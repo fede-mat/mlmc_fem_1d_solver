@@ -114,9 +114,11 @@ def visualize_mean_trend_from_norms(obs, num_samples_l, levels):
 seed = 2026
 np.random.seed(seed) # for reproducibility
 
-total_num_samples = 100
+total_num_samples = 10000
 # We use auxiliary_mlmc.py to compute the optimal number of samples of each level
-percetage = np.array([0.17057356, 0.14457316, 0.10927159, 0.13943153, 0.09303149, 0.07291983, 0.08881164, 0.0726671,  0.05782876, 0.05089134])
+#percetage = np.array([0.17057356, 0.14457316, 0.10927159, 0.13943153, 0.09303149, 0.07291983, 0.08881164, 0.0726671,  0.05782876, 0.05089134])
+percetage =np.array([0.65443527, 0.18357191, 0.05748126, 0.02997732, 0.02407946, 0.01587871,
+ 0.012445,   0.00867652, 0.00754133, 0.00591321])
 num_samples_l = percetage*total_num_samples
 num_samples_l.round()
 levels = np.linspace(1, 10, 10)
@@ -155,3 +157,4 @@ print(string_1)
 with open('results/multilevel_monte_carlo_estimation_results.txt', 'a') as f:
     f.write(string + '\n')
     f.write(string_1 + '\n')
+    f.write('\n')

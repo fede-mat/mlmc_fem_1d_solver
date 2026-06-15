@@ -82,7 +82,7 @@ random field.
 \bigskip
 \item Algorithms like Box-Muller let us easily sample from a standard normal distribution.
 \bigskip
-\item While the desired mean can be achieved via the summation of the mean vector, the right covariance is quite more involved since it is necessary an expensive \textbf{Cholesky factorization}.
+\item While the desired mean can be achieved via the summation of the mean vector, the right covariance is considerably more involved since it requires an expensive \textbf{Cholesky factorization}.
 \end{itemize}
 
 \end{frame}
@@ -231,11 +231,11 @@ the $\{b_i\}$ are jointly Gaussian with zero mean and covariance:
 This sampling technique gives a random field sample with the right covariance function but we have to solve a SPDE. 
 
 \bigskip
-A clever way of doing that is choose as FEM space an extension of FEM space 
-that we use on $G$ to solve the original PDE with random coefficient, or vice versa, choose the FEM on G as a restriction of the one define on D.
+A natural approach is to choose as FEM space an extension of the FEM space 
+that we use on $G$ to solve the original PDE with random coefficient, or vice versa, choose the FEM on $G$ as a restriction of the one defined on $D$.
 
 \bigskip
-Doing so we obtain for free the value of the random field on the space spacial nodes where we will solve the original problem.
+Doing so we obtain for free the value of the random field on the spatial nodes where we will solve the original problem.
 \bigskip
 
 $V_h^D = \mathrm{span}\{\varphi_1,\ldots,\varphi_m\} \subset H^1_0(D)$
@@ -279,7 +279,7 @@ $V_h^D = \mathrm{span}\{\varphi_1,\ldots,\varphi_m\} \subset H^1_0(D)$
 
 \begin{frame}{Solve the SPDE via FEM}
 \bigskip
-The discretised weak form of the PSDEreads:
+The discretised weak form of the SPDE reads:
 \begin{equation}
   (u_h, v_h) + \kappa^{-2}(\nabla u_h, \nabla v_h) = \langle\dot{W}, v_h\rangle
   \quad \forall v_h \in V_h^D.
