@@ -98,13 +98,4 @@ There is no CI configured; tests are informal plotting / sanity scripts.
 - The drivers set a fixed seed (`seed = 2026`) for reproducible demonstrations. Change or expose the seed
   via a command-line argument if you need different runs.
 
-## Contact / Attribution
 
-This is research/teaching code in the local workspace. For questions, open an issue in the associated
-repository or contact the code owner.
-
----
-If you'd like, I can also:
-- add a short usage CLI (argparse) to the MC/MLMC drivers,
-- run the example scripts here and capture runtime errors (if any), or
-- add a small CONTRIBUTING or DEVELOPMENT section describing how to extend the code.
