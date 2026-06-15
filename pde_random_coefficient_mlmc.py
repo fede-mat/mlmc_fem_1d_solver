@@ -93,6 +93,7 @@ def multilevel_montecarlo_estimation(num_samples_l,levels, f, g0, gN, k):
                 _ , _ , q_norm_l , q_norm_l_1 = solve_coupled_pde_problem(x_Gl,x_Gl_1,x_Dl,x_Dl_1,x_Ds,f,g0,gN,k)
                 increm[offset + i] = q_norm_l - q_norm_l_1
         offset += samples_per_level[l]
+        print("End of level",l+1)
     return increm
 
 def visualize_mean_trend_from_norms(obs, num_samples_l, levels):
@@ -113,7 +114,7 @@ def visualize_mean_trend_from_norms(obs, num_samples_l, levels):
 seed = 2026
 np.random.seed(seed) # for reproducibility
 
-total_num_samples = 100000
+total_num_samples = 100
 # We use auxiliary_mlmc.py to compute the optimal number of samples of each level
 percetage = np.array([0.17057356, 0.14457316, 0.10927159, 0.13943153, 0.09303149, 0.07291983, 0.08881164, 0.0726671,  0.05782876, 0.05089134])
 num_samples_l = percetage*total_num_samples
